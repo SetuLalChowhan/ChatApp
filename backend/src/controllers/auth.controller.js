@@ -1,5 +1,7 @@
+import { sendWelcomeEmail } from "../emails/emailHandlers.js";
 import { generateToken } from "../lib/utils.js";
 import User from "../models/User.js";
+import bcrypt from "bcryptjs";
 
 export const login = async (req, res) => {};
 export const signup = async (req, res) => {
@@ -56,7 +58,7 @@ export const signup = async (req, res) => {
         await sendWelcomeEmail(
           savedUser.email,
           savedUser.fullName,
-          ENV.CLIENT_URL
+          process.env.CLIENT_URL
         );
       } catch (error) {
         console.error("Failed to send welcome email:", error);
