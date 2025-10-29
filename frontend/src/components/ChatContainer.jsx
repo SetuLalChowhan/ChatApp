@@ -18,13 +18,13 @@ function ChatContainer() {
   const { authUser } = useAuthStore();
   const messageEndRef = useRef(null);
 
-  useEffect(() => {
-    getMessagesByUserId(selectedUser._id);
-    subscribeToMessages();
+ useEffect(() => {
+  getMessagesByUserId(selectedUser._id); // fetch initial messages
+  subscribeToMessages(); // start listening for new messages
 
-    // clean up
-    return () => unsubscribeFromMessages();
-  }, [selectedUser, getMessagesByUserId, subscribeToMessages, unsubscribeFromMessages]);
+  return () => unsubscribeFromMessages(); // clean up
+}, [selectedUser]);
+
 
   useEffect(() => {
     if (messageEndRef.current) {
